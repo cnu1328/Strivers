@@ -27,7 +27,7 @@ public class Solution {
 		return Math.max(pick, notpick);
 	}
 	public static int maximumNonAdjacentSum(ArrayList<Integer> nums) {
-		return maximumSum(nums.size() - 1, nums);
+		return maximumSum(nums.size() - 1,f nums);
 	}
 }
 ```
