@@ -147,6 +147,6 @@ bool subsetSumToK(int n, int k, vector<int> &arr) {
 
 ## Complexity Analysis
 
-### Time Complexity: O(N\*target);
+### Time Complexity: O(N\*target)
 
 ### Space Complexity: O(target)

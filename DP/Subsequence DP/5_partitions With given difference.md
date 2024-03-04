@@ -8,7 +8,7 @@
 1. This problem is similar to the DP-17 but with modified target sum.
 2. As he given difference, such that s1 - s2 = d.
 3. we make s2 = (total - d)/2, so we find total number of ways to make s2 from the given array.
-4. We returnt the answer.
+4. We return the answer.
 
 ```C++
 
@@ -33,9 +33,10 @@ int solve(int n, int tar, vector<int> &arr, vector<vector<int>> &dp) {
 
 	int take = 0;
 
-	if(arr[n] <= tar) take =solve(n-1, tar-arr[n], arr, dp);
+	if(arr[n] <= tar) take = solve(n-1, tar-arr[n], arr, dp);
 
 	return dp[n][tar] = (notTake + take)%mod;
+	
 }
 
 int findWays(vector<int>& arr, int k)
