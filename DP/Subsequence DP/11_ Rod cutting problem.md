@@ -38,7 +38,7 @@ public class Solution {
 
 ### Space Complexity: O(N) (Stack Space)
 
-## Tabulation
+## Memoization
 
 ```Java
 
@@ -72,7 +72,6 @@ public class Solution {
 		return solve(n, n, price, dp);
 	}
 }
-
 
 ```
 
