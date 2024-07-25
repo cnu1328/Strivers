@@ -45,4 +45,59 @@ public:
 
 ### Space Complexity: O(1)
 
-## Approach - 2
+## Approach - 2 - Binary Search
+
+1. Use lower bound, to find the first position of `1` in the row => lower_bound(1) as `ind`
+2. Use upper bound, to find the first position of `1` in the row => upper_bound(0)
+3. The number of ones in a row can be obtained m - ind
+4. Find the maximum one's index out of all
+
+```Java
+
+class Solution {
+
+    private int lowerBound(int arr[], int m, int target) {
+        int low = 0, high = m - 1;
+        int ans = m;
+
+        while(low <= high) {
+            int mid = low + (high - low)/2;
+
+            if(arr[mid] >= 1) {
+                ans = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+
+        return ans;
+    }
+    public int rowWithMax1s(int arr[][]) {
+
+        int index = -1, maxi = 0;
+
+        int n = arr.length;
+        int m = arr[0].length;
+
+        for(int i=0; i<n; i++) {
+
+            int count = m - lowerBound(arr[i], m, 1);
+
+            if(count > maxi) {
+                maxi = count;
+                index = i;
+            }
+        }
+
+        return index;
+    }
+}
+
+```
+
+## Complexity Analysis:
+
+### Time Complexity: O(N \* Log M)
+
+### Space Complexity: O(1)
