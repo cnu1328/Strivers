@@ -126,9 +126,9 @@ public class Solution {
 
 			int take = nums.get(i);
 
-			if(i > 1) take += prev;
+			if(i > 1) take += prev2;
 
-			int nottake = prev2;
+			int nottake = prev;
 
 			int curr = Math.max(take, nottake);
 			prev2 = prev;
