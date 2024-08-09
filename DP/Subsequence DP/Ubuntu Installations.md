@@ -113,3 +113,11 @@ java --version
 1. Type command in terminal `sudo apt-get install mysql-server`
 2. To check installed `mysql --version`
 3. Type to use mysql `sudo mysql -u root -p`
+
+## Database Connectivity
+
+```sql
+
+Alter user 'root'@'localhost' identified with mysql_native_password by "password";
+
+```
