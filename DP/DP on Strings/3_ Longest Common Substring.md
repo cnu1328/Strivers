@@ -9,6 +9,9 @@
 3. The the characters matches then decrement i-1 and j-1
 4. otherwise put i-1 and j-1 zero value
 
+<img width="738" alt="image" src="https://github.com/user-attachments/assets/63730c32-c8da-41ac-939d-ec58d9510231">
+
+
 ```Java
 
 public class Solution {
