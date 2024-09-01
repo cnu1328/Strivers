@@ -2,7 +2,8 @@
 
 [Problem Link](https://www.naukri.com/code360/problems/boundary-traversal-of-binary-tree_790725)
 
-![Image](https://files.codingninjas.in/boundarytraversal-5149.png)
+![image](https://github.com/user-attachments/assets/22c0e76e-0904-4c5b-a2da-fd099c126859)
+
 
 ## Approach - 1
 
