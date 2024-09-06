@@ -48,6 +48,9 @@ class Solution{
 7. If not exist, then insert prefixSum to the map
 8. Return the max subarray length, whose sum is K
 
+![image](https://github.com/user-attachments/assets/e15c0bc5-f976-401c-9617-f3a4081e699e)
+
+
 ```Java
 
 class Solution{
