@@ -58,21 +58,20 @@ class Solution {
 
     private int lowerBound(int arr[], int m, int target) {
         int low = 0, high = m - 1;
-        int ans = m;
 
-        while(low <= high) {
+        while(low < high) {
             int mid = low + (high - low)/2;
 
             if(arr[mid] >= 1) {
-                ans = mid;
-                high = mid - 1;
+                high = mid;
             } else {
                 low = mid + 1;
             }
         }
 
-        return ans;
+        return low;
     }
+
     public int rowWithMax1s(int arr[][]) {
 
         int index = -1, maxi = 0;
