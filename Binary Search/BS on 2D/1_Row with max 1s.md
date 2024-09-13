@@ -100,3 +100,44 @@ class Solution {
 ### Time Complexity: O(N \* Log M)
 
 ### Space Complexity: O(1)
+
+## Approach - 3 
+1. Start traversing from mat[0][m-1]
+2. If we find the mat[row][col] == 1, then decrement col and store ans = row
+3. else increment row
+4. return the answer
+
+```c++
+
+class Solution {
+  public:
+    int rowWithMax1s(vector<vector<int> > &arr) {
+        
+        int n = arr.size();
+        int m = arr[0].size();
+        
+        int ans = -1;
+        int row = 0, col = m-1;
+        
+        while(row < n && col >= 0) {
+            if(arr[row][col] == 1) {
+                ans = row;
+                col --;
+            }
+            
+            else {
+                row ++;
+            }
+        }
+        
+        return ans;
+    }
+};
+
+```
+
+## Complexity Analysis:
+
+### Time Complexity: O(N + M)
+
+### Space Complexity: O(1)
