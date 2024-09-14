@@ -12,52 +12,51 @@
 
 ```Java
 
-// User function template for C++
-
-class Solution{
-    public:
+class Solution {
+  public:
     
-    void solve(int row, int col, int n, vector<vector<int>> &m, string &curr, vector<string> &ans,
-    int dx[], int dy[], char ch[], vector<vector<int>> &visited) {
+    void solve(int row, int col, int n, vector<vector<int>> &mat, string &curr, vector<string> &ans,
+    int dir[], char ch[], vector<vector<int>> &visited) {
         
         if(row == n-1 && col == n-1) {
             ans.push_back(curr);
             return;
         }
         
+        visited[row][col] = true;
+    
+        
         
         for(int i=0; i<4; i++) {
-            int newR = row + dx[i];
-            int newC = col + dy[i];
+            int newR = row + dir[i];
+            int newC = col + dir[i + 1];
             
-            if(newR >=0 && newR <n && newC >=0 && newC <n && m[newR][newC] == 1 && visited[newR][newC] == 0) {
+            if(newR >=0 && newR <n && newC >=0 && newC <n && mat[newR][newC] == 1 && visited[newR][newC] == 0) {
                 curr.push_back(ch[i]);
-                visited[newR][newC] = 1;
-                solve(newR, newC, n, m, curr, ans, dx, dy, ch, visited);
+                solve(newR, newC, n, mat, curr, ans, dir, ch, visited);
                 curr.pop_back();
-                visited[newR][newC] = 0;
             }
         }
         
+        visited[row][col] = false;
+        
     }
-    
-    vector<string> findPath(vector<vector<int>> &m, int n) {
-        // Your code goes here
+  
+    vector<string> findPath(vector<vector<int>> &mat) {
         
         vector<string> ans;
         string curr = "";
         
-        int dx[] = {-1, 1, 0, 0};
-        int dy[] = {0, 0, 1, -1};
+        int n = mat.size();
         
-        char ch[] = {'U', 'D', 'R', 'L'};
+        int dir[] = {-1, 0, 1, 0, -1};
+        
+        char ch[] = {'U', 'R', 'D', 'L'};
         
         vector<vector<int>> visited(n, vector<int> (n, 0));
         
-        visited[0][0] = 1;
-        
-        if(m[0][0]) {
-            solve(0, 0, n, m, curr, ans, dx, dy, ch, visited);
+        if(mat[0][0]) {
+            solve(0, 0, n, mat, curr, ans, dir, ch, visited);
         }
         
         return ans;
