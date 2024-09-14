@@ -20,37 +20,33 @@
 ```Java
 
 class Solution {
+  public:
     
-    private static int distSubCount(String str) {
+    int distinctSubs(string str) {
+        unordered_map<char, int> mp;
+        int ans = 1;
         
-        Map<Character, Integer> last = new HashMap<>();
-        int count = 1;
-        
-        for(int i=0; i<str.length(); i++) {
+        for(char c : str) {
             
-            char s = str.charAt(i);
+            int count = 2 * ans;
             
-            int newCount = 2 * count;
+            count -= mp[c];
             
-            if(last.containsKey(s)) {
-                newCount -= last.get(s);
-            }
+            mp[c] = ans;
             
-            last.put(s, count);
-            count = newCount;
+            ans = count;
         }
         
-        return count;
+        return ans;
     }
-    
-    public static String betterString(String str1, String str2) {
-        // Code here
-        int better1 = distSubCount(str1);
-        int better2 = distSubCount(str2);
+  
+    string betterString(string str1, string str2) {
+        int better1 = distinctSubs(str1);
+        int better2 = distinctSubs(str2);
         
         return better1 >= better2 ? str1 : str2;
     }
-}
+};
 
 ```
 
