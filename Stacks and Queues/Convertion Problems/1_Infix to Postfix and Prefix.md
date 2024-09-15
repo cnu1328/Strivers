@@ -85,7 +85,7 @@ int main() {
 
 ## Complexity Analysis:
 
-### Time Complexity: O(1)
+### Time Complexity: O(N)
 
 ### Space Complexity: (N)
 
@@ -98,3 +98,261 @@ int main() {
 3. Perform Infix to postfix with controlled(i.e, precedence[s[i]] < precedence[st.top()])
 4. Reverse the resultant
 5. return the resultant string
+
+```c++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int pre(char c) {
+    if(c == '^') return 3;
+    
+    else if(c == '/' || c == '*') return 2;
+    
+    else if(c == '+' || c == '-') return 1;
+    
+    return -1;
+}
+
+string convertToPostFix(string str) {
+    stack<char> st;
+    string ans = "";
+    string num = "";
+    int n = str.length();
+    
+    for(int i=0; i<str.length(); i++) {
+        char c = str[i];
+        
+        if(c >= '1' && c <= '9') {
+            
+            while(i < n && isdigit(str[i])) {
+                num += str[i];
+                i++;
+            }
+            
+            i--;
+            
+            ans += num + "#";
+            num = "";
+        }
+        
+        else if(c == '(') {
+            st.push(c);
+        }
+        
+        else if(c == ')') {
+            while(st.top() != '(') {
+                ans += st.top();
+                st.pop();
+            }
+            
+            st.pop();
+        }
+        
+        else {
+            while(!st.empty() && pre(c) <= pre(st.top())) {
+                ans += st.top();
+                st.pop();
+            }
+            
+            st.push(c);
+        }
+    
+    }
+    
+    while(!st.empty()) {
+        ans += st.top();
+        st.pop();
+    }
+    
+    return ans;
+    
+}
+
+int getVal(string post) {
+    
+    stack<int> st;
+    int n = post.length();
+    
+    for(int i=0; i<n; i++) {
+        char c = post[i];
+        
+        if(isdigit(c)) {
+            int num = 0;
+            
+            while(i < n && isdigit(post[i])) {
+                num = num * 10 + post[i] - '0';
+                i++;
+            }
+            
+            st.push(num);
+        }
+        
+        else {
+            int second = st.top();
+            st.pop();
+            int first = st.top();
+            st.pop();
+            
+            if(c == '^') {
+                st.push(pow(first, second));
+            }
+            
+            else if(c == '*') {
+                st.push(first * second);
+            }
+            
+            else if(c == '/') {
+                st.push(first / second);
+            }
+            
+            else if(c == '+') {
+                st.push(first + second);
+            }
+            
+            else if(c == '-') {
+                st.push(first - second);
+            }
+        }
+        
+        
+    }
+    
+    return st.top();
+    
+    
+}
+
+string convertToPrefix(string str) {
+    reverse(str.begin(), str.end());
+    // ")3-1^55(*3+452"
+    
+    int n = str.length();
+    string ans = "";
+    stack<char> st;
+    
+    for(int i=0; i<n; i++) {
+        char c = str[i];
+        if(isdigit(c)) {
+            string num = "";
+            
+            while(i < n && isdigit(str[i])) {
+                num += str[i];
+                i++;
+            }
+            
+            i--;
+            
+            reverse(num.begin(), num.end());
+            
+            ans += num + "#";
+        }
+        
+        else if(c == ')') {
+            st.push(c);
+        }
+        
+        else if(c == '(') {
+            while(st.top() != ')') {
+                ans += st.top();
+                st.pop();
+            }
+            st.pop();
+        }
+        
+        else {
+            while(!st.empty() && pre(c) < pre(st.top())) {
+                ans += st.top();
+                st.pop();
+            }
+            
+            st.push(c);
+        }
+    }
+    
+    while(!st.empty()) {
+        ans += st.top();
+        st.pop();
+    }
+    
+    reverse(ans.begin(), ans.end());
+    
+    return ans;
+    
+}
+
+int getPreVal(string pre) {
+    stack<int> st;
+    int n = pre.length();
+    
+    for(int i=n-1; i>=0; i--) {
+        char c = pre[i];
+        
+        if(isdigit(c)) {
+            int num = 0;
+            
+            while(i >= 0 && isdigit(pre[i])) {
+                num = num * 10 + pre[i] - '0';
+                i--;
+            }
+            
+            st.push(num);
+        } 
+        
+        else {
+            
+            int first = st.top();
+            st.pop();
+            int second = st.top();
+            st.pop();
+            
+            // cout<<first<<" "<<second<<endl;
+            
+            if(c == '^') {
+                st.push(pow(first, second));
+            }
+            
+            else if(c == '*') {
+                st.push(first * second);
+            }
+            
+            else if(c == '/') {
+                st.push(first / second);
+            }
+            
+            else if(c == '+') {
+                st.push(first + second);
+            }
+            
+            else if(c == '-') {
+                st.push(first - second);
+            }
+        }
+    }
+    
+    return st.top();
+}
+
+int main() {
+	
+	string str = "254+3*(55^1-3)";
+	
+	
+	string postfix = convertToPostFix(str);
+	
+	cout<<postfix<<endl;
+	cout<<getVal(postfix)<<endl;
+	
+	string prefix = convertToPrefix(str);
+	cout<<prefix<<endl;
+	cout<<getPreVal(prefix)<<endl;
+
+}
+
+```
+
+## Complexity Analysis:
+
+### Time Complexity: O(N)
+
+### Space Complexity: (N)
