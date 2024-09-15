@@ -8,85 +8,80 @@
 2. pop - O(N)
 
 ```c++
-
-#include<iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-struct stackNode {
-  int data;
-  stackNode * next;
-  int size;
-  stackNode(int d) {
-    data = d;
-    next = NULL;
-  }
+class Node {
+public:
+    int data;
+    Node *next;
+    
+    Node(int _data) {
+        data = _data;
+        next = NULL;
+    } 
 };
 
-
-struct stack {
-  stackNode * top;
-  int size;
-  stack() {
-    top = NULL;
-    size = 0;
-  }
-
-
-  void stackPush(int x) {
-    stackNode * element = new stackNode(x);
-    element -> next = top;
-    top = element;
-    cout << "Element pushed" << "\n";
-    size++;
-  }
-
-
-  int stackPop() {
-    if (top == NULL) {
-      return -1;
+class Stack {
+public: 
+    int size;
+    Node *top;
+    
+    Stack() {
+        size = 0;
+        top = NULL;
     }
-    int topData = top -> data;
-    stackNode * temp = top;
-    top = top -> next;
-    delete temp;
-    size--;
-    return topData;
-  }
-
-
-  int stackSize() {
-    return size;
-  }
-
-  bool stackIsEmpty() {
-    return top == NULL;
-  }
-
-
-  int stackPeek() {
-    if (top == NULL) return -1;
-    return top -> data;
-  }
-
-  void printStack() {
-    stackNode * current = top;
-    while (current != NULL) {
-      cout << current -> data << " ";
-      current = current -> next;
+    
+    void push(int ele) {
+        Node *nn = new Node(ele);
+        nn->next = top;
+        top = nn;
+        
+        size ++;
     }
-  }
-
+    
+    int topEle() {
+        if(top == NULL) return -1;
+        
+        return top->data;
+    }
+    
+    void pop() {
+        if(top) {
+            top = top->next;
+            size --;
+        }
+    }
+    
+    int stackSize() {
+        return size;
+    }
+    
+    bool empty() {
+        return top == NULL;
+    }
+    
+    
 };
-
 
 int main() {
-  stack s;
-  s.stackPush(10);
-  cout << "Element popped: " << s.stackPop() << "\n";
-  cout << "Stack size: " << s.stackSize() << "\n";
-  cout <<"Stack empty or not? "<<s.stackIsEmpty()<<"\n";
-  cout << "stack's top element: " << s.stackPeek() << "\n";
-  return 0;
+    Stack st;
+    
+    st.push(10);
+    st.push(20);
+    st.push(30);
+    st.push(40);
+    st.push(50);
+    cout<<st.topEle()<<endl;
+    cout<<st.stackSize()<<endl;
+    st.pop();
+    cout<<st.topEle()<<endl;
+    st.pop();
+    cout<<st.empty()<<endl;
+    cout<<st.topEle()<<endl;
+    
+
 }
+
 
 ```
