@@ -58,21 +58,20 @@ class Solution {
 
     private int lowerBound(int arr[], int m, int target) {
         int low = 0, high = m - 1;
-        int ans = m;
 
-        while(low <= high) {
+        while(low < high) {
             int mid = low + (high - low)/2;
 
             if(arr[mid] >= 1) {
-                ans = mid;
-                high = mid - 1;
+                high = mid;
             } else {
                 low = mid + 1;
             }
         }
 
-        return ans;
+        return low;
     }
+
     public int rowWithMax1s(int arr[][]) {
 
         int index = -1, maxi = 0;
@@ -99,5 +98,46 @@ class Solution {
 ## Complexity Analysis:
 
 ### Time Complexity: O(N \* Log M)
+
+### Space Complexity: O(1)
+
+## Approach - 3 
+1. Start traversing from mat[0][m-1]
+2. If we find the mat[row][col] == 1, then decrement col and store ans = row
+3. else increment row
+4. return the answer
+
+```c++
+
+class Solution {
+  public:
+    int rowWithMax1s(vector<vector<int> > &arr) {
+        
+        int n = arr.size();
+        int m = arr[0].size();
+        
+        int ans = -1;
+        int row = 0, col = m-1;
+        
+        while(row < n && col >= 0) {
+            if(arr[row][col] == 1) {
+                ans = row;
+                col --;
+            }
+            
+            else {
+                row ++;
+            }
+        }
+        
+        return ans;
+    }
+};
+
+```
+
+## Complexity Analysis:
+
+### Time Complexity: O(N + M)
 
 ### Space Complexity: O(1)
