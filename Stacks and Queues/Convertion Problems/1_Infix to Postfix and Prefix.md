@@ -99,7 +99,7 @@ int main() {
 4. Reverse the resultant
 5. return the resultant string
 
-```c++
+```C++
 
 #include <bits/stdc++.h>
 using namespace std;
