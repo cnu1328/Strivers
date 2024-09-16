@@ -65,3 +65,65 @@ class Solution
 ### Time Complexity: O(N ^ 2)
 
 ### Space Complexity: (1)
+
+## Approach - 2
+
+1. First sort the given jobs based on the deadline in ascending order
+2. Then declare a min-heap and curr_deadline is 1
+3. If arr[i].dead >= curr_deadline, means we can take this and push the profit to the mheap and increment the curr_deadline
+4. If not, then the present arr[i].profit > mheap.top(), then pop the top profit form mheap and push arr[i].profit to the mheap
+5. After array traversal, traverse the mheap and find the jobs and profit
+6. return {jobs, profit}
+
+```c++
+
+class Solution 
+{
+    public:
+    
+    static bool comp(Job a, Job b) {
+        return a.dead < b.dead;
+    } 
+    
+    
+    vector<int> JobScheduling(Job arr[], int n) 
+    { 
+        sort(arr, arr + n, comp);
+        
+        priority_queue<int, vector<int>, greater<>> mheap;
+        
+        int curr = 1;
+        
+        for(int i=0; i<n; i++) {
+            if(arr[i].dead >= curr) {
+                mheap.push(arr[i].profit);
+                curr ++;
+            }
+            
+            else if(arr[i].profit > mheap.top()) {
+                mheap.pop();
+                mheap.push(arr[i].profit);
+            }
+        }
+        
+        vector<int> ans;
+        
+        int jobs = 0, profit = 0;
+        
+        while(!mheap.empty()) {
+            jobs ++;
+            profit += mheap.top();
+            mheap.pop();
+        }
+        
+        return {jobs, profit};
+    } 
+};
+
+```
+
+## Complexity Analysis:
+
+### Time Complexity: O(N * Log N)
+
+### Space Complexity: (1)
