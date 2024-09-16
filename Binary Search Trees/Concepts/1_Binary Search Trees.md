@@ -21,7 +21,7 @@ Left Child < Node < Right Child
 
 ## All Operations on Binary Search Trees
 
-```c++
+```java
 
 #include <bits/stdc++.h>
 using namespace std;
