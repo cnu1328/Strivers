@@ -7,7 +7,7 @@
 1. The floor is nothing but, find the equal or immediate smaller element for the given key
 2. The idea is if we find the key value in the tree then return the value
 3. Or else, if the key value is greater than curr node value, It means current node value is less than the key value. So, the curr node value is might be our answer, so update the floor
-4. or else if the key value is less than curr node value, so we don't require the right branch, curr = curr->left
+4. or else if the key value is less than curr node value, so we don't require the right branch, curr = curr->right
 5. return the ceil
 
 ```c++
@@ -27,13 +27,13 @@ public:
 
             if(curr->data == key) return key;
 
-            if(key > curr->data) {
-                flor = curr->data;
-                curr = curr->right;
+            if(key < curr->data) {
+                curr = curr->left;
             }
 
             else {
-                curr = curr->left;
+                flor = curr->data;
+                curr = curr->right;
             }
         }
 
@@ -47,4 +47,4 @@ public:
 
 ### Time Complexity : O(H)
 
-### Space Compleixty : O(H)
+### Space Compleixty : O(1)
