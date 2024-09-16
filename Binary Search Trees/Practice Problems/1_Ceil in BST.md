@@ -42,4 +42,4 @@ int findCeil(Node* root, int key) {
 
 ### Time Complexity : O(H)
 
-### Space Compleixty : O(H)
+### Space Compleixty : O(1)
