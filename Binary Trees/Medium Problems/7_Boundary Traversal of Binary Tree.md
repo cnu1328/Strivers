@@ -12,7 +12,7 @@
 3. Do any traversal and find the leaf nodes and push them to answer(Bottom traversal)
 4. Traverse the right Boundary(from root to always to right, if null then left), use stack here to reverse the boundary, as we are traversing in anti-clock-wise direction
 
-```c++
+```java
 
 public class Solution {
 
