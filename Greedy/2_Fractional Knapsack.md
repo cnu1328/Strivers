@@ -4,10 +4,11 @@
 
 ## Approach - 1
 
-1. Sort the values based on the the (weight[i]/value)
-2. Traverse from the last
-3. If we can take all the weight, then add value to our answer
-4. If we can't then add its fractional weight
+1. Sort the values based on the the (value[i]/weight[i])
+2. Traverse from the first
+3. If we can take all the weight, then add value[i] to our answer, and decrement weight by weight[i
+4. If we can't then add its fractional weight (value[i]/weight[i]) gives us the fraction, then multiply it with remaining weigh
+5. return the answer
 
 ```c++
 
