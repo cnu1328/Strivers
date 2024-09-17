@@ -110,3 +110,92 @@ class Solution {
 ### Time Complexity: O(N + M) + O(N + M)
 
 ### Space Complexity: (N)
+
+
+## Approach - 2 - Toposort with BFS
+
+```java
+
+class Solution {
+  public:
+  
+     void toposort(vector<pair<int, int>> adj[], vector<int> &inDegree, vector<int> &topo) {
+        
+        queue<int> que;
+        
+        for(int i=0; i<inDegree.size(); i++) {
+            if(inDegree[i] == 0) {
+                que.push(i);
+            }
+        }
+        
+        while(!que.empty()) {
+            int node = que.front();
+            que.pop();
+            topo.push_back(node);
+            
+            for(auto adjNode : adj[node]) {
+                int child = adjNode.first;
+                
+                inDegree[child] --;
+                
+                if(inDegree[child] == 0) {
+                    que.push(child);
+                }
+            }
+        }
+         
+         
+     }
+     vector<int> shortestPath(int n,int m, vector<vector<int>>& edges){
+        
+        vector<pair<int, int>> adj[n];
+        vector<int> inDegree(n, 0);
+        
+        for(auto edge : edges) {
+            adj[edge[0]].push_back({edge[1], edge[2]});
+            inDegree[edge[1]] ++;
+        }
+        
+        vector<int> topo;
+        
+        toposort(adj, inDegree, topo);
+        
+        vector<int> dist(n, 1e9);
+        
+        int index = 0;
+        
+        dist[topo[index]] = 0;
+        
+        while(index < n) {
+            int node = topo[index++];
+            
+            for(auto adjNode : adj[node]) {
+                
+                int child = adjNode.first;
+                int distance = adjNode.second;
+                
+                
+                if(dist[node] + distance < dist[child]) {
+                    dist[child] = dist[node] + distance;
+                }
+            }
+        }
+        
+        for(int i=0; i<n; i++){
+            if(dist[i] == 1e9) {
+                dist[i] = -1;
+            }
+        }
+        
+        
+        return dist;
+    }
+};
+
+```
+## Complexity Analysis:
+
+### Time Complexity: O(V + E) + O(V + E)
+
+### Space Complexity: (V)
