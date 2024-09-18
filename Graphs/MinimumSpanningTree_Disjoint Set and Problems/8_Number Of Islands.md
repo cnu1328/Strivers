@@ -145,6 +145,9 @@ class Solution {
 
 ### Space Compleixty : O(M\*N)
 
+
+```cpp
+
 class DisjointSet {
 
 public:
@@ -247,3 +250,5 @@ int countSubIslands(vector<vector<int>>& grid1, vector<vector<int>>& grid2) {
     }
 
 };
+
+```
