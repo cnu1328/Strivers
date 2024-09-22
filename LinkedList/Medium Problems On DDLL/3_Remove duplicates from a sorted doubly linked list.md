@@ -56,3 +56,41 @@ class Solution{
 ### Time Complexity: O(N)
 
 ### Space Complexity: (1)
+
+
+## Approach - 2
+
+```c++
+
+class Solution
+{
+public:
+
+    Node * removeDuplicates(struct Node *head)
+    {
+        Node *curr = head->next;
+        Node *removed = head;
+        
+        while(curr) {
+            if(curr->data != removed->data) {
+                removed->next = curr;
+                curr->prev = removed;
+                removed = curr;
+            }
+            
+            curr = curr->next;
+        }
+        
+        removed->next = NULL;
+        
+        return head;
+    }
+};
+
+```
+
+## Complexity Analysis:
+
+### Time Complexity: O(N)
+
+### Space Complexity: (1)
