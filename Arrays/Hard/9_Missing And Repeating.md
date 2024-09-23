@@ -80,65 +80,62 @@ class Solve {
 
 ```Java
 
-class Solve {
-    int[] findTwoElement(int arr[], int n) {
-
+class Solution {
+  public:
+    vector<int> findTwoElement(vector<int>& arr) {
+        
         int xr = 0;
-
+        int n = arr.size();
+        
         for(int i=0; i<n; i++) {
-            xr = xr ^ arr[i];
-            xr = xr ^ (i + 1);
+            xr = xr ^ arr[i] ^ (i + 1);
         }
-
-
+        
         int count = 0;
-
-        while(true) {
-
-            if((xr & (1<<count)) != 0) {
+        
+        while(xr > 0) {
+            if(xr & 1) {
                 break;
             }
-
-            count++;
+            
+            count ++;
+            xr >>= 1;
         }
-
+        
         int ele1 = 0, ele2 = 0;
-
+        
         for(int i=0; i<n; i++) {
-            if((arr[i] & (1 << count)) != 0) {
-                ele1 = ele1 ^ arr[i];
-            } else {
-                ele2 = ele2 ^ arr[i];
+            if((arr[i]>>count) & 1) {
+                ele1 ^= arr[i];
+            }
+            
+            else {
+                ele2 ^= arr[i];
+            }
+            
+            if(((i + 1) >> count) & 1) {
+                ele1 ^= (i + 1);
+            }
+            
+            else {
+                ele2 ^= (i + 1);
             }
         }
-
-        for(int i=1; i<=n; i++) {
-            if((i & (1 << count))  != 0) {
-                ele1 ^= i;;
-            } else {
-                ele2 ^= i;
-            }
+        
+        int count1 = 0, count2 = 0;
+        
+        for(int ele : arr) {
+            if(ele1 == ele) count1 ++;
+            if(ele2 == ele) count2 ++;
         }
-
-        count = 0;
-
-        for(int i=0; i<n; i++) {
-            if(arr[i] == ele1) {
-                count++;
-            }
+        
+        if(count1 == 2) {
+            return {ele1, ele2};
         }
-
-        if(count == 2) {
-            int ans[] = {ele1, ele2};
-
-            return ans;
-        }
-
-        int ans[] = {ele2, ele1};
-
-        return ans;
+        
+        return {ele2, ele1};
     }
-}
+};
 
 ```
 
