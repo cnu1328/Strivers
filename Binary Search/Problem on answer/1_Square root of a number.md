@@ -57,22 +57,33 @@ public static int floorSqrt(int n) {
 
 ```Java
 
-public static int floorSqrt(int n) {
-    int low = 1, high = n;
-    //Binary search on the answers:
-    while (low <= high) {
-        long mid = (low + high) / 2;
-        long val = mid * mid;
-        if (val <= (long)(n)) {
-            //eliminate the left half:
-            low = (int)(mid + 1);
-        } else {
-            //eliminate the right half:
-            high = (int)(mid - 1);
+class Solution {
+  public:
+    long long int floorSqrt(long long int n) {
+        // Your code goes here
+        
+        long long int low = 0, high = n;
+        long long int ans;
+        
+        while(low <= high) {
+            long long int mid = low + (high - low) / 2;
+            
+            long long int value = mid * mid;
+            
+            if(value <= n) {
+                ans = mid;
+                low = mid + 1;
+            }
+            
+            else {
+                high = mid - 1;
+            }
+            
         }
+        
+        return ans;
     }
-    return high;
-}
+};
 
 ```
 
