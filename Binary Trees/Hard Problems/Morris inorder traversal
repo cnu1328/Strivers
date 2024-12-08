@@ -1,5 +1,80 @@
+# Morris Inorder Traversal
+
+[Problem Link](https://leetcode.com/problems/binary-tree-inorder-traversal/description/)
+
 ## Intuition
 
-## as we know inorder traversal is [ left , root , right]
+1. First Observation
+2. if the current node has no left . then that node should be printed. because no left to traversal
+3. if there is a left subtree to the current node. before exploring it we need to add a thread between left's right last node and the current root node
+4. for establishing the thread. first store the current node's left in a variable called prev
+5. Now explore the prev's right subtree only right side until last and that is not equal to the current node
+6. after traversal if the prev->right == nullptr. now, its time to establish a thread b/n prev->right = curr
+and also next task is to explore the curr->left subtree. so , assign curr = curr->left
+7. if prev->right != nullptr that means there is already a thread exists. so , we need to remove it
+bcz , it is already visited. so , prev->right = nullptr , print the current value . this is the point to explore right subtree 
+of the current node . so , assign curr = curr->right
 
-## Morris traversal uses Threaded binary tree
+```c++
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+
+        vector<int> ans;
+
+        if(root == nullptr)
+            return ans;
+
+        TreeNode* curr = root;
+
+        while(curr != nullptr)
+        {
+            // case 1 if current->left == nulllptr
+            // print the root value and explore the right sub tree
+            if(curr->left == nullptr)
+            {
+                ans.push_back(curr->val);
+                curr = curr->right;
+            }
+            else{
+                TreeNode* prev = curr->left;
+                while(prev->right && prev->right != curr)
+                {
+                    prev = prev->right;
+                }
+                if(prev->right == nullptr)
+                {
+                    prev->right = curr;
+                    curr = curr->left;
+                }
+                else{
+                    prev->right = nullptr;
+                    ans.push_back(curr->val);
+                    curr = curr->right;
+                }
+            }
+        }
+        return ans;
+        
+    }
+};
+
+```
+
+## Complexitiy Analysis:
+
+### Time Complexity : O(N)
+
+### Space Compleixty : O(N)
