@@ -1,0 +1,5 @@
+## Intuition
+
+## as we know inorder traversal is [ left , root , right]
+
+## Morris traversal uses Threaded binary tree
