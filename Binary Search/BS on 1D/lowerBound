@@ -1,0 +1,51 @@
+#Title: LowerBound or floor in a sorted array
+
+n = 7
+x = 5 
+arr[] = {1,2,8,10,11,12,19}
+
+what is a floor or lower bound?
+It is defined as the largest element k in arr[] such that k is smaller than or equal to x
+
+#Approach 1:
+
+Traverse the array from the 0th index and check whether that 
+element is lesser than x and maximum of all the traversed elements
+
+#Time complexity: O(n)
+#space complexity: O(1)
+
+#Approch 2:
+
+On the basis of binary search algorithm
+let low = 0
+high = n-1
+
+First target: we need to findout the element which is smaller than x
+so, calculate mid = (low+high)/2
+
+-> if the mid value is greater than the x. ignore the part from the high portion
+so, move the high pointer to mid - 1
+
+-> if the mid value is less than the x. store the index as ans and move
+the low pointer to mid + 1 in search of the larger element
+
+##code
+
+int lt = 0 , rt = n-1;
+int ans = -1;
+        
+while(lt <= rt)
+{
+      int mid = (lt+rt)/2;
+         
+      if(arr[mid] > x)
+      {
+            rt = mid-1;
+      }
+      else{
+            ans = mid;
+            lt = mid+1;
+      }
+}        
+return ans;
